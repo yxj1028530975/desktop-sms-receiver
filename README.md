@@ -57,6 +57,16 @@ cp .env.docker.example .env
 - `ADMIN_PASSWORD`
 - `ADMIN_SESSION_SECRET`
 
+当前 Docker 构建默认已经接了国内镜像源：
+
+- `APT_MAIN_MIRROR`
+- `APT_SECURITY_MIRROR`
+- `PIP_INDEX_URL`
+- `PIP_TRUSTED_HOST`
+- `UV_DEFAULT_INDEX`
+
+如果你的服务器更适合阿里云、腾讯云或公司内网源，直接改 `.env` 里的这些值即可，不用再改 `Dockerfile`。
+
 启动容器：
 
 ```bash
