@@ -1,0 +1,84 @@
+{
+  "name": "sms-desktop-app",
+  "private": true,
+  "version": "0.1.0",
+  "description": "Desktop SMS Receiver",
+  "author": "Codex",
+  "main": "dist-electron/main.js",
+  "scripts": {
+    "dev": "concurrently -k \"npm:dev:renderer\" \"npm:dev:main\" \"npm:dev:electron\"",
+    "dev:renderer": "vite",
+    "dev:main": "tsc -p tsconfig.node.json --watch --preserveWatchOutput",
+    "dev:electron": "wait-on tcp:5173 file:dist-electron/main.js && cross-env VITE_DEV_SERVER_URL=http://localhost:5173 electron .",
+    "build:renderer": "vite build",
+    "build:main": "tsc -p tsconfig.node.json",
+    "build:icons": "node scripts/build-icons.cjs",
+    "build": "npm run build:renderer && npm run build:main",
+    "dist:win": "npm run build && npm run build:icons && electron-builder --win nsis portable",
+    "dist:dir": "npm run build && npm run build:icons && electron-builder --win dir",
+    "start": "electron .",
+    "verify:runtime": "electron scripts/verify-runtime.cjs"
+  },
+  "build": {
+    "appId": "com.codex.sms.desktop",
+    "productName": "桌面短信接收器",
+    "executableName": "sms-receiver",
+    "asar": true,
+    "compression": "normal",
+    "directories": {
+      "output": "release",
+      "buildResources": "assets"
+    },
+    "files": [
+      "dist/**/*",
+      "dist-electron/**/*",
+      "assets/**/*",
+      "package.json"
+    ],
+    "extraMetadata": {
+      "main": "dist-electron/main.js"
+    },
+    "win": {
+      "icon": "app-icon.ico",
+      "signAndEditExecutable": false,
+      "verifyUpdateCodeSignature": false,
+      "target": [
+        "nsis",
+        "portable"
+      ]
+    },
+    "nsis": {
+      "oneClick": false,
+      "allowToChangeInstallationDirectory": true,
+      "allowElevation": true,
+      "createDesktopShortcut": "always",
+      "createStartMenuShortcut": true,
+      "shortcutName": "桌面短信接收器",
+      "installerIcon": "app-icon.ico",
+      "uninstallerIcon": "app-icon.ico",
+      "installerHeaderIcon": "app-icon.ico"
+    },
+    "portable": {
+      "artifactName": "桌面短信接收器-便携版-${version}.${ext}"
+    }
+  },
+  "dependencies": {
+    "react": "^19.1.0",
+    "react-dom": "^19.1.0"
+  },
+  "devDependencies": {
+    "@types/node": "^22.15.3",
+    "@types/react": "^19.1.2",
+    "@types/react-dom": "^19.1.2",
+    "@vitejs/plugin-react": "^4.4.1",
+    "concurrently": "^9.1.2",
+    "cross-env": "^7.0.3",
+    "electron": "^35.1.5",
+    "electron-builder": "^26.0.12",
+    "sharp": "^0.34.2",
+    "to-ico": "^1.1.5",
+    "typescript": "^5.8.3",
+    "vite": "^6.3.5",
+    "wait-on": "^8.0.3"
+  }
+}

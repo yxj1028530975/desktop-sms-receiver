@@ -1,0 +1,11 @@
+.env
+.venv
+.uv-cache
+__pycache__
+*.pyc
+*.pyo
+*.pyd
+artifacts
+data
+logs
+scripts

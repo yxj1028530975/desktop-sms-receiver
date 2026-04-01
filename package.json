@@ -1,0 +1,13 @@
+{
+  "name": "desktop-sms-receiver",
+  "private": true,
+  "version": "0.1.0",
+  "scripts": {
+    "dev:backend": "uv --directory apps/backend run uvicorn app.main:app --reload --host 0.0.0.0 --port 8000",
+    "dev:desktop": "npm.cmd --prefix apps/desktop run dev",
+    "dist:desktop": "npm --prefix apps/desktop run dist:win",
+    "smoke:sms": "uv --directory apps/backend run python scripts/smoke_sms_flow.py",
+    "smoke:desktop": "npm --prefix apps/desktop run verify:runtime -- --scenario connected",
+    "smoke:targeted": "uv --directory apps/backend run python scripts/smoke_targeted_routing.py"
+  }
+}

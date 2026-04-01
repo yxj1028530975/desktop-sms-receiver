@@ -1,0 +1,273 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>SMS Admin</title>
+    <link rel="stylesheet" href="/admin/assets/admin_page.css" />
+</head>
+<body>
+    <div class="page">
+        <section class="card hero">
+            <div class="grid hero-main">
+                <div>
+                    <p class="eyebrow" data-copy="hero.kicker"></p>
+                    <h1 data-copy="hero.title"></h1>
+                </div>
+                <p class="muted hero-copy" data-copy="hero.description"></p>
+                <div class="flow">
+                    <span class="flow-chip" data-copy="hero.step1"></span>
+                    <span class="flow-chip" data-copy="hero.step2"></span>
+                    <span class="flow-chip" data-copy="hero.step3"></span>
+                </div>
+            </div>
+            <div class="session-panel">
+                <span class="session-label" data-copy="session.label"></span>
+                <strong id="session-state"></strong>
+                <p id="session-detail" class="muted"></p>
+            </div>
+        </section>
+
+        <section id="status" class="card status hidden" data-tone="success">
+            <div class="toolbar">
+                <strong id="status-title"></strong>
+                <button id="status-close" class="button" type="button" data-copy="common.close"></button>
+            </div>
+            <p id="status-detail" class="muted status-detail"></p>
+        </section>
+
+        <section id="login-panel" class="login-grid">
+            <section class="card section-card">
+                <p class="eyebrow" data-copy="login.kicker"></p>
+                <h2 data-copy="login.title"></h2>
+                <p class="muted login-copy" data-copy="login.description"></p>
+                <form id="login-form" class="grid login-form">
+                    <label class="field">
+                        <span data-copy="login.username"></span>
+                        <input id="username" name="username" type="text" required data-copy-placeholder="login.usernamePlaceholder" />
+                    </label>
+                    <label class="field">
+                        <span data-copy="login.password"></span>
+                        <input id="password" name="password" type="password" required data-copy-placeholder="login.passwordPlaceholder" />
+                    </label>
+                    <div class="actions">
+                        <button class="button primary" type="submit" data-copy="login.submit"></button>
+                    </div>
+                </form>
+            </section>
+
+            <section class="card section-card">
+                <p class="eyebrow" data-copy="login.hintKicker"></p>
+                <h2 data-copy="login.hintTitle"></h2>
+                <div class="hint-list">
+                    <div class="hint-item">
+                        <strong data-copy="login.hint1Title"></strong>
+                        <p class="muted hint-body" data-copy="login.hint1Body"></p>
+                    </div>
+                    <div class="hint-item">
+                        <strong data-copy="login.hint2Title"></strong>
+                        <p class="muted hint-body" data-copy="login.hint2Body"></p>
+                    </div>
+                    <div class="hint-item">
+                        <strong data-copy="login.hint3Title"></strong>
+                        <p class="muted hint-body" data-copy="login.hint3Body"></p>
+                    </div>
+                </div>
+            </section>
+        </section>
+
+        <section id="admin-panel" class="hidden admin-layout">
+            <section class="card section-card admin-hero">
+                <div class="toolbar admin-toolbar">
+                    <div class="grid section-heading">
+                        <p class="eyebrow" data-copy="dashboard.kicker"></p>
+                        <h2 data-copy="dashboard.title"></h2>
+                        <p class="muted" data-copy="dashboard.description"></p>
+                    </div>
+                    <div class="actions">
+                        <button id="refresh" class="button" type="button" data-copy="dashboard.refresh"></button>
+                        <button id="logout" class="button" type="button" data-copy="dashboard.logout"></button>
+                    </div>
+                </div>
+                <div class="summary-grid">
+                    <article class="summary-card">
+                        <span class="summary-label" data-copy="dashboard.summaryClients"></span>
+                        <strong id="summary-clients">0</strong>
+                        <p class="muted" data-copy="dashboard.summaryClientsHint"></p>
+                    </article>
+                    <article class="summary-card">
+                        <span class="summary-label" data-copy="dashboard.summaryOnline"></span>
+                        <strong id="summary-online">0</strong>
+                        <p class="muted" data-copy="dashboard.summaryOnlineHint"></p>
+                    </article>
+                    <article class="summary-card">
+                        <span class="summary-label" data-copy="dashboard.summaryBindings"></span>
+                        <strong id="summary-bindings">0</strong>
+                        <p class="muted" data-copy="dashboard.summaryBindingsHint"></p>
+                    </article>
+                </div>
+            </section>
+
+            <section class="card section-card admin-nav">
+                <div class="nav-group" role="tablist" aria-label="admin-navigation">
+                    <button class="nav-chip is-active" type="button" data-admin-nav="clients" aria-selected="true" data-copy="nav.clients"></button>
+                    <button class="nav-chip" type="button" data-admin-nav="bindings" aria-selected="false" data-copy="nav.bindings"></button>
+                    <button class="nav-chip" type="button" data-admin-nav="logs" aria-selected="false" data-copy="nav.logs"></button>
+                </div>
+                <p class="muted admin-nav-copy" data-copy="nav.description"></p>
+            </section>
+
+            <section class="admin-view is-active" data-admin-view="clients">
+                <section class="card section-card stack create-panel">
+                    <div class="grid section-heading">
+                        <p class="eyebrow" data-copy="clients.kicker"></p>
+                        <h2 data-copy="clients.createPanelTitle"></h2>
+                        <p class="muted" data-copy="clients.createPanelDescription"></p>
+                    </div>
+                    <form id="client-form" class="grid form-grid">
+                        <label class="field">
+                            <span data-copy="clients.nameLabel"></span>
+                            <input id="client-name" name="display_name" type="text" required data-copy-placeholder="clients.namePlaceholder" />
+                        </label>
+                        <label class="field">
+                            <span data-copy="clients.tokenLabel"></span>
+                            <input id="client-token" name="access_token" type="text" data-copy-placeholder="clients.tokenPlaceholder" />
+                        </label>
+                        <label class="field field-span">
+                            <span data-copy="clients.noteLabel"></span>
+                            <textarea id="client-note" name="note" data-copy-placeholder="clients.notePlaceholder"></textarea>
+                        </label>
+                        <div class="actions">
+                            <button class="button primary" type="submit" data-copy="clients.create"></button>
+                        </div>
+                    </form>
+                </section>
+
+                <section class="card section-card stack records-panel">
+                    <div class="toolbar records-toolbar">
+                        <div class="grid section-heading">
+                            <p class="eyebrow" data-copy="clients.kicker"></p>
+                            <h2 data-copy="clients.title"></h2>
+                            <p class="muted" data-copy="clients.description"></p>
+                        </div>
+                    </div>
+                    <div id="client-list" class="list-scroll"></div>
+                </section>
+            </section>
+
+            <section class="admin-view" data-admin-view="bindings">
+                <section class="card section-card stack create-panel">
+                    <div class="grid section-heading">
+                        <p class="eyebrow" data-copy="bindings.kicker"></p>
+                        <h2 data-copy="bindings.createPanelTitle"></h2>
+                        <p class="muted" data-copy="bindings.createPanelDescription"></p>
+                    </div>
+                    <form id="binding-form" class="grid form-grid">
+                        <label class="field">
+                            <span data-copy="bindings.phoneLabel"></span>
+                            <input id="binding-phone" name="phone_number" type="text" required data-copy-placeholder="bindings.phonePlaceholder" />
+                        </label>
+                        <label class="field">
+                            <span data-copy="bindings.clientLabel"></span>
+                            <select id="binding-client" name="client_id" required></select>
+                        </label>
+                        <label class="field field-span">
+                            <span data-copy="bindings.noteLabel"></span>
+                            <textarea id="binding-note" name="note" data-copy-placeholder="bindings.notePlaceholder"></textarea>
+                        </label>
+                        <label class="row toggle-row">
+                            <input id="binding-enabled" name="enabled" type="checkbox" checked />
+                            <span data-copy="bindings.enabled"></span>
+                        </label>
+                        <div class="actions">
+                            <button class="button primary" type="submit" data-copy="bindings.save"></button>
+                        </div>
+                    </form>
+                </section>
+
+                <section class="card section-card stack records-panel">
+                    <div class="toolbar records-toolbar">
+                        <div class="grid section-heading">
+                            <p class="eyebrow" data-copy="bindings.kicker"></p>
+                            <h2 data-copy="bindings.title"></h2>
+                            <p class="muted" data-copy="bindings.description"></p>
+                        </div>
+                    </div>
+                    <div id="binding-list" class="list-scroll"></div>
+                </section>
+            </section>
+
+            <section class="admin-view" data-admin-view="logs">
+                <section class="card section-card stack">
+                    <div class="grid section-heading">
+                        <p class="eyebrow" data-copy="logs.filtersKicker"></p>
+                        <h2 data-copy="logs.filtersTitle"></h2>
+                        <p class="muted" data-copy="logs.filtersDescription"></p>
+                    </div>
+                    <div class="logs-filter-grid">
+                        <label class="field">
+                            <span data-copy="logs.limitLabel"></span>
+                            <select id="logs-limit">
+                                <option value="40">40</option>
+                                <option value="80" selected>80</option>
+                                <option value="150">150</option>
+                                <option value="300">300</option>
+                            </select>
+                        </label>
+                        <label class="field">
+                            <span data-copy="logs.levelLabel"></span>
+                            <select id="logs-level">
+                                <option value="" data-copy="logs.levelAll"></option>
+                                <option value="info" data-copy="logs.levelInfo"></option>
+                                <option value="error" data-copy="logs.levelError"></option>
+                            </select>
+                        </label>
+                        <label class="field">
+                            <span data-copy="logs.pathLabel"></span>
+                            <select id="logs-path">
+                                <option value="" data-copy="logs.pathAll"></option>
+                                <option value="/api/sms/inbound" data-copy="logs.pathInbound"></option>
+                                <option value="/api/messages" data-copy="logs.pathMessages"></option>
+                                <option value="/api/admin" data-copy="logs.pathAdmin"></option>
+                                <option value="/health" data-copy="logs.pathHealth"></option>
+                            </select>
+                        </label>
+                        <label class="field">
+                            <span data-copy="logs.statusLabel"></span>
+                            <select id="logs-status">
+                                <option value="" data-copy="logs.statusAll"></option>
+                                <option value="200">200</option>
+                                <option value="400">400</option>
+                                <option value="401">401</option>
+                                <option value="404">404</option>
+                                <option value="409">409</option>
+                                <option value="422">422</option>
+                                <option value="500">500</option>
+                            </select>
+                        </label>
+                    </div>
+                    <div class="actions">
+                        <button id="apply-log-filters" class="button primary" type="button" data-copy="logs.applyFilters"></button>
+                        <button id="reset-log-filters" class="button" type="button" data-copy="logs.resetFilters"></button>
+                    </div>
+                </section>
+
+                <section class="card section-card stack records-panel">
+                    <div class="toolbar records-toolbar">
+                        <div class="grid section-heading">
+                            <p class="eyebrow" data-copy="logs.kicker"></p>
+                            <h2 data-copy="logs.title"></h2>
+                            <p class="muted" data-copy="logs.description"></p>
+                        </div>
+                        <div class="actions">
+                            <button id="refresh-logs" class="button" type="button" data-copy="logs.refresh"></button>
+                        </div>
+                    </div>
+                    <div id="request-log-list" class="list-scroll"></div>
+                </section>
+            </section>
+        </section>
+    </div>
+    <script src="/admin/assets/admin_page.js"></script>
+</body>
+</html>

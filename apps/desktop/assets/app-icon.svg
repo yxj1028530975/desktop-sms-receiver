@@ -1,0 +1,38 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="256" height="256" viewBox="0 0 256 256">
+  <defs>
+    <linearGradient id="bg" x1="18" y1="18" x2="238" y2="238" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#18222E"/>
+      <stop offset="1" stop-color="#0A1017"/>
+    </linearGradient>
+    <linearGradient id="screen" x1="58" y1="82" x2="202" y2="178" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#6EA7BF"/>
+      <stop offset="1" stop-color="#264154"/>
+    </linearGradient>
+    <linearGradient id="bubble" x1="142" y1="42" x2="224" y2="118" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#7DB7CC"/>
+      <stop offset="1" stop-color="#4C8097"/>
+    </linearGradient>
+    <linearGradient id="accent" x1="74" y1="104" x2="138" y2="138" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#F5C78C"/>
+      <stop offset="1" stop-color="#C98E55"/>
+    </linearGradient>
+  </defs>
+
+  <rect x="18" y="18" width="220" height="220" rx="56" fill="url(#bg)"/>
+  <rect x="18" y="18" width="220" height="220" rx="56" fill="none" stroke="#FFFFFF" stroke-opacity=".08" stroke-width="2"/>
+
+  <rect x="46" y="76" width="164" height="108" rx="30" fill="#0F1823" stroke="#324556" stroke-width="6"/>
+  <rect x="58" y="88" width="140" height="82" rx="22" fill="url(#screen)"/>
+
+  <path d="M78 112h48" stroke="url(#accent)" stroke-width="14" stroke-linecap="round"/>
+  <path d="M78 136h76" stroke="#EEF7FB" stroke-width="11" stroke-linecap="round"/>
+  <path d="M78 158h52" stroke="#EEF7FB" stroke-opacity=".7" stroke-width="10" stroke-linecap="round"/>
+
+  <rect x="154" y="108" width="26" height="26" rx="9" fill="#10202C" fill-opacity=".25" stroke="#D8EEF8" stroke-opacity=".5" stroke-width="3"/>
+  <path d="M161 121h12M161 128h12" stroke="#F9FCFF" stroke-width="4" stroke-linecap="round"/>
+  <path d="M68 198h120" stroke="#D8E0E8" stroke-opacity=".2" stroke-width="12" stroke-linecap="round"/>
+  <path d="M104 216h48" stroke="#D8E0E8" stroke-opacity=".3" stroke-width="10" stroke-linecap="round"/>
+
+  <path d="M144 42h44c18.778 0 34 15.222 34 34v18c0 18.778-15.222 34-34 34h-18.768l-16.468 15.03c-4.761 4.345-12.432.963-12.432-5.508V128H138c-18.778 0-34-15.222-34-34V76c0-18.778 15.222-34 34-34Z" fill="url(#bubble)"/>
+  <path d="M154 72h40M154 89h50M154 106h28" stroke="#F8FCFF" stroke-width="9" stroke-linecap="round"/>
+</svg>
