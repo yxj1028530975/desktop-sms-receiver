@@ -2,6 +2,13 @@
 
 这个项目用于接收 iPhone 快捷指令上报的短信内容，写入独立后端服务，并按手机号路由实时推送到桌面客户端。
 
+## 仓库地址
+
+```bash
+git clone https://github.com/yxj1028530975/desktop-sms-receiver.git
+cd desktop-sms-receiver
+```
+
 ## 项目结构
 
 - `apps/backend`
@@ -19,9 +26,9 @@
 
 ## 本地启动后端
 
-```powershell
-Set-Location D:\项目\项目文件\桌面通讯\apps\backend
-Copy-Item .env.example .env
+```bash
+cd apps/backend
+cp .env.example .env
 uv sync
 uv run uvicorn app.main:app --host 0.0.0.0 --port 8000
 ```
@@ -39,12 +46,12 @@ uv run uvicorn app.main:app --host 0.0.0.0 --port 8000
 
 先准备环境变量：
 
-```powershell
-Set-Location D:\项目\项目文件\桌面通讯\apps\backend
-Copy-Item .env.docker.example .env
+```bash
+cd apps/backend
+cp .env.docker.example .env
 ```
 
-然后按需修改 `.env`，至少建议改掉这几个默认值：
+然后至少改掉这几个默认值：
 
 - `INBOUND_API_KEY`
 - `ADMIN_PASSWORD`
@@ -52,13 +59,13 @@ Copy-Item .env.docker.example .env
 
 启动容器：
 
-```powershell
+```bash
 docker compose up -d --build
 ```
 
 查看状态：
 
-```powershell
+```bash
 docker compose ps
 docker compose logs -f
 ```
@@ -70,16 +77,16 @@ docker compose logs -f
 
 ### Docker 文件
 
-- Docker 镜像定义：[Dockerfile](D:/项目/项目文件/桌面通讯/apps/backend/Dockerfile)
-- Compose 配置：[docker-compose.yml](D:/项目/项目文件/桌面通讯/apps/backend/docker-compose.yml)
-- 生产环境变量示例：[.env.docker.example](D:/项目/项目文件/桌面通讯/apps/backend/.env.docker.example)
+- `apps/backend/Dockerfile`
+- `apps/backend/docker-compose.yml`
+- `apps/backend/.env.docker.example`
 
-### 持久化
+### 持久化目录
 
 Compose 默认会把下面两个目录挂载到宿主机：
 
-- [apps/backend/data](D:/项目/项目文件/桌面通讯/apps/backend/data)
-- [apps/backend/logs](D:/项目/项目文件/桌面通讯/apps/backend/logs)
+- `apps/backend/data`
+- `apps/backend/logs`
 
 其中：
 
@@ -89,22 +96,35 @@ Compose 默认会把下面两个目录挂载到宿主机：
 ### 部署注意
 
 - 当前 WebSocket 在线客户端状态保存在进程内存里，所以后端必须以单实例运行，不要开多个副本。
-- 如果你前面还有 Nginx、Caddy 或 FRP，记得放行 WebSocket 升级。
+- 如果前面还有 Nginx、Caddy 或 FRP，记得放行 WebSocket 升级。
 - Docker 容器内部固定监听 `8000`，对外端口可以自行映射。
 
 ## 本地启动桌面端
 
-```powershell
-Set-Location D:\项目\项目文件\桌面通讯\apps\desktop
-npm.cmd install
-npm.cmd run build
-npm.cmd run start
+```bash
+cd apps/desktop
+npm install
+npm run build
+npm run start
 ```
 
 桌面端需要填写：
 
 - 后端地址：`http://127.0.0.1:8000`
 - 客户端令牌：从后台创建客户端后复制
+
+## 打包桌面端
+
+在仓库根目录运行：
+
+```bash
+npm run dist:desktop
+```
+
+打包产物输出到：
+
+- `apps/desktop/release/桌面短信接收器 Setup 0.1.0.exe`
+- `apps/desktop/release/桌面短信接收器-便携版-0.1.0.exe`
 
 ## 后台管理台
 
@@ -165,7 +185,7 @@ ws://127.0.0.1:8000/api/ws/desktop?token=your-client-token
 
 在仓库根目录运行：
 
-```powershell
+```bash
 npm run smoke:sms
 npm run smoke:targeted
 npm run smoke:desktop
