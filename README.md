@@ -83,8 +83,8 @@ docker compose logs -f
 
 部署完成后：
 
-- 后端地址：`http://你的服务器IP:8000`
-- 后台地址：`http://你的服务器IP:8000/admin`
+- 后端地址：`http://你的服务器IP:9018`
+- 后台地址：`http://你的服务器IP:9018/admin`
 
 ### Docker 文件
 
