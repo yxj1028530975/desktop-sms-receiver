@@ -5,6 +5,7 @@ ARG APT_SECURITY_MIRROR=http://mirrors.tuna.tsinghua.edu.cn/debian-security
 ARG PIP_INDEX_URL=https://pypi.tuna.tsinghua.edu.cn/simple
 ARG PIP_TRUSTED_HOST=pypi.tuna.tsinghua.edu.cn
 ARG UV_DEFAULT_INDEX=https://pypi.tuna.tsinghua.edu.cn/simple
+ARG UV_HTTP_TIMEOUT=180
 
 ENV PYTHONDONTWRITEBYTECODE=1 \
     PYTHONUNBUFFERED=1 \
@@ -14,7 +15,8 @@ ENV PYTHONDONTWRITEBYTECODE=1 \
     UV_LINK_MODE=copy \
     UV_COMPILE_BYTECODE=1 \
     UV_PYTHON_DOWNLOADS=never \
-    UV_DEFAULT_INDEX=${UV_DEFAULT_INDEX}
+    UV_DEFAULT_INDEX=${UV_DEFAULT_INDEX} \
+    UV_HTTP_TIMEOUT=${UV_HTTP_TIMEOUT}
 
 WORKDIR /app
 
@@ -31,7 +33,14 @@ RUN set -eux; \
 RUN pip install --no-cache-dir --retries 10 --timeout 120 --trusted-host "${PIP_TRUSTED_HOST}" uv
 
 COPY pyproject.toml uv.lock ./
-RUN uv sync --frozen --no-dev
+RUN set -eux; \
+    for attempt in 1 2 3; do \
+        uv sync --frozen --no-dev && break; \
+        if [ "$attempt" -eq 3 ]; then \
+            exit 1; \
+        fi; \
+        sleep 5; \
+    done
 
 COPY app ./app
 COPY .env.example ./.env.example

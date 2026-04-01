@@ -64,6 +64,7 @@ cp .env.docker.example .env
 - `PIP_INDEX_URL`
 - `PIP_TRUSTED_HOST`
 - `UV_DEFAULT_INDEX`
+- `UV_HTTP_TIMEOUT`
 
 如果你的服务器更适合阿里云、腾讯云或公司内网源，直接改 `.env` 里的这些值即可，不用再改 `Dockerfile`。
 
